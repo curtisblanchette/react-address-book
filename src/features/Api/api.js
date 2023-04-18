@@ -5,6 +5,7 @@ export const apiSlice = createApi({
     baseUrl: 'http://localhost:5000'
   }),
   reducerPath: 'api',
+  tagTypes: ['Contact', 'Contacts'],
   endpoints: builder => ({
 
     getContacts: builder.query({
@@ -25,7 +26,9 @@ export const apiSlice = createApi({
     getContactById: builder.query({
       query: (id) => `/contacts/${id}`,
       // Tags tell RTK when/how to invalidate cache when results match existing tags
-      providesTags: (result, error, arg) => [{type: 'Contact', id: arg}]
+      providesTags: (result, error, arg) => [
+        {type: 'Contact', id: arg}
+      ]
     }),
 
   }),

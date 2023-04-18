@@ -1,17 +1,9 @@
 import { rest } from 'msw';
-import { faker } from '@faker-js/faker';
+import { contacts } from "./seed";
 
-const baseUrl = (path) => {
+export const baseUrl = (path) => {
   return new URL(path, 'http://localhost:5000').toString()
 }
-
-const contacts = Array.from({length: 100}).map((e, id) => ({
-  id,
-  name: faker.name.fullName(),
-  address: faker.address.streetAddress(true),
-  phone: faker.phone.number()
-}));
-
 
 export const handlers = [
   rest.get(baseUrl('/contacts'), (req, res, ctx) => {
@@ -23,12 +15,14 @@ export const handlers = [
     }
 
     return res(
+      ctx.delay(),
       ctx.status(200),
       ctx.json(filtered)
     )
   }),
   rest.get(baseUrl('/contacts/:id'), (req,res,ctx) => {
     return res(
+      ctx.delay(),
       ctx.status(200),
       ctx.json(contacts.find(c => c.id === parseInt(req.params.id, 0)))
     )

@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { store } from "./store";
 import { Provider } from "react-redux";
 import { worker } from "./mocks/browser";
+import { store } from "./store";
 
 if (process.env.NODE_ENV === 'development') {
   worker.start()
