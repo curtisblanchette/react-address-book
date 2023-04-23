@@ -29,9 +29,20 @@ export const apiSlice = createApi({
       providesTags: (result, error, arg) => [
         {type: 'Contact', id: arg}
       ]
-    }),
-
-  }),
+    })
+  })
 });
+
+export const graphSlice = createApi({
+  baseQuery: fetchBaseQuery({
+    baseUrl: 'http://localhost:4000'
+  }),
+  reducerPath: 'graph',
+  endpoints: builder => ({
+    getLibraries: builder.query({
+
+    })
+  })
+})
 
 export const { useGetContactsQuery, useGetContactByIdQuery } = apiSlice;
